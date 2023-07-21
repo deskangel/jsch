@@ -51,6 +51,17 @@ class Util {
   }
 
   static byte[] fromBase64(byte[] buf, int start, int length) throws JSchException {
+
+    // remove '\r' or '\n' from end
+    for (int i = length - 1; i >= start; i--) {
+      if (buf[i] == '\r' || buf[i]=='\n') {
+        length--;
+      } else {
+        break;
+      }
+    }
+
+
     try {
       byte[] foo = new byte[length];
       int j = 0;
